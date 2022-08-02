@@ -10,6 +10,10 @@ const PlaceDetailScreen = ({ navigation }) => {
   );
 };
 
+export const PlaceDetailOptions = ({ route }) => ({
+  headerTitle: route.params.placeTitle,
+});
+
 export default PlaceDetailScreen;
 
 const styles = StyleSheet.create({});

@@ -1,16 +1,37 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
+import PlaceItem from "../component/PlaceItem";
 
 const PlacesListScreen = ({ navigation }) => {
+  const places = useSelector((state) => state.places.places);
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Places List Screen</Text>
-      <Button title="Next" onPress={() => navigation.navigate("PlaceDetail")} />
-      <Button title="New" onPress={() => navigation.navigate("AddingPlace")} />
+    <View style={styles.container}>
+      <FlatList
+        data={places}
+        keyExtractor={(item) => item.id}
+        renderItem={(itemData) => (
+          <PlaceItem
+            image={null}
+            title={itemData.item.title}
+            address={null}
+            onSelect={() => {
+              navigation.navigate("PlaceDetail", {
+                placeTitle: itemData.item.title,
+                placeId: itemData.item.id,
+              });
+            }}
+          />
+        )}
+      />
     </View>
   );
 };
 
 export default PlacesListScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+  },
+});

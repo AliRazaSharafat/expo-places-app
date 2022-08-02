@@ -11,17 +11,20 @@ import NewPlaceScreen from "../screens/NewPlaceScreen";
 import MapScreen from "../screens/MapScreen";
 import Colors from "../constants/Color";
 import HeaderButton from "../component/HeaderButton";
+// screen options
+import { NewPlaceScreenOptions } from "../screens/NewPlaceScreen";
+import { PlaceDetailOptions } from "../screens/PlaceDetailScreen";
 
 const Stack = createNativeStackNavigator();
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 40, height: 40 }}
-      source={require("../assets/icon.png")}
-    />
-  );
-}
+// function LogoTitle() {
+//   return (
+//     <Image
+//       style={{ width: 40, height: 40 }}
+//       source={require("../assets/icon.png")}
+//     />
+//   );
+// }
 
 const PlacesViewStack = () => {
   return (
@@ -53,18 +56,13 @@ const PlacesViewStack = () => {
       <Stack.Screen
         name="PlaceDetail"
         component={PlacesDetailScreen}
-        options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
+        options={PlaceDetailOptions}
       />
-      <Stack.Screen name="NewPlace" component={NewPlaceScreen} />
-      <Stack.Screen name="Map" component={MapScreen} />
-    </Stack.Navigator>
-  );
-};
-
-const AddPlaceStack = () => {
-  return (
-    <Stack.Navigator initialRouteName="AddPlace">
-      <Stack.Screen name="AddPlace" component={NewPlaceScreen} />
+      <Stack.Screen
+        name="NewPlace"
+        component={NewPlaceScreen}
+        options={NewPlaceScreenOptions}
+      />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
   );
@@ -77,11 +75,6 @@ const AppNavigation = () => {
         <Stack.Screen
           name="PlacesView"
           component={PlacesViewStack}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AddingPlace"
-          component={AddPlaceStack}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
